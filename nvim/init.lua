@@ -464,9 +464,6 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {
-          filetypes = {"python"},
-        },
         rust_analyzer = {
           filetypes = {"rust"},
           settings = {
