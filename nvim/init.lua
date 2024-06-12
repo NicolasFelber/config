@@ -213,7 +213,7 @@ require('lazy').setup({
 
   {
     "lervag/vimtex",
-    lazy = false,     -- we don't want to lazy load VimTeX
+    lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here
@@ -465,13 +465,38 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         rust_analyzer = {
-          filetypes = {"rust"},
+          filetypes = { "rust" },
           settings = {
             ['rust_analyzer'] = {
               cargo = {
                 allFeatures = true,
               },
             },
+          },
+        },
+        ruff = {},
+        pyright = {},
+        texlab = {
+          auxDirectory = ".",
+          bibtexFormatter = "texlab",
+          build = {
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            executable = "latexmk",
+            forwardSearchAfter = false,
+            onSave = false
+          },
+          chktex = {
+            onEdit = false,
+            onOpenAndSave = false
+          },
+          diagnosticsDelay = 300,
+          formatterLineLength = 80,
+          forwardSearch = {
+            args = {}
+          },
+          latexFormatter = "latexindent",
+          latexindent = {
+            modifyLineBreaks = false
           },
         },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -529,41 +554,29 @@ require('lazy').setup({
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "stevearc/conform.nvim",
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-    local null_ls = require("null-ls")
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.diagnostics.ruff,
-        null_ls.builtins.diagnostics.mypy,
-      },
-      on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_clear_autocmds({
-          group = augroup,
-          buffer = bufnr,
-        })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-              callback = function()
-              vim.lsp.buf.format({bufnr = bufnr})
-              end,
-        })
-          end
-        end,
-    })
-  end
+      local conform = require('conform')
+      conform.setup({
+        formatter_by_ft = {
+          python = { 'isort', 'black' },
+          lua = { 'stylua' },
+          cpp = { 'astyle' },
+          c = { 'astyle' },
+          java = { 'astyle' },
+          rust = { 'rustfmt' },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 500,
+        }
+      })
+    end
   },
 
   { -- Autocompletion
