@@ -193,22 +193,6 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
-  {
-    'simrat39/rust-tools.nvim',
-    config = function()
-      local rt = require("rust-tools")
-      rt.setup({
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-          end,
-        },
-      })
-    end,
-  },
 
 
   {
@@ -465,7 +449,6 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         rust_analyzer = {
-          filetypes = { "rust" },
           settings = {
             ['rust_analyzer'] = {
               cargo = {
