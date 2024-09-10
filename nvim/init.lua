@@ -261,6 +261,17 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          path_display = { "smart" },
+          layout_config = {
+            vertical = {
+              height = 0.99
+            },
+            horizontal = {
+              width = 0.99
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
