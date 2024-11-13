@@ -476,6 +476,7 @@ require('lazy').setup({
           },
         },
         ruff = {},
+        clangd = {},
         pyright = {},
         texlab = {
           auxDirectory = ".",
