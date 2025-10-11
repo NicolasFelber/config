@@ -152,9 +152,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
-  { 'github/copilot.vim' },
+  { 'numToStr/Comment.nvim',    opts = {} },
 
   {
     'bullets-vim/bullets.vim',
