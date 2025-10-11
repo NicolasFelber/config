@@ -9,17 +9,7 @@ $directory\
 [](fg:color_yellow bg:color_aqua)\
 $git_branch\
 $git_status\
-[](fg:color_aqua bg:color_blue)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[ ](fg:color_blue )\
+[ ](fg:color_aqua )\
 """
 
 palette = 'gruvbox_dark'
