@@ -66,7 +66,11 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5
+
+vim.opt.tabstop.set = 2
+vim.opt.shiftwidth.set = 2
+vim.opt.expandtab.set = 2
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -152,21 +156,21 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',    opts = {} },
 
-  { 'github/copilot.vim' },
 
   {
     'bullets-vim/bullets.vim',
     config = function()
-      vim.g.bullets_enabled_file_types = { 'markdown' }
+      vim.g.bullets_enabled_file_types = { 'markdown', 'typst' }
+      vim.g.bullets_outline_levels = { 'std-', 'std-', 'std-', 'std-' }
     end,
   },
 
   {
     'bullets-vim/bullets.vim',
     init = function()
-      vim.g.bullets_enabled_file_types = { 'markdown' }
+      vim.g.bullets_enabled_file_types = { 'markdown', 'typst' }
     end
   },
 
@@ -576,8 +580,8 @@ require('lazy').setup({
         formatter_by_ft = {
           python = { 'isort', 'black' },
           lua = { 'stylua' },
-          cpp = { 'astyle' },
-          c = { 'astyle' },
+          cpp = { 'clang-format' },
+          c = { 'clang-format' },
           java = { 'astyle' },
           rust = { 'rustfmt' },
         },
